@@ -11,8 +11,10 @@ pipeline {
         sh '''# Determine user used by jenkins for debugging
 whoami
 
-# Perform everything in tmp 
+
+# Perform everything in tmp, clean up from failed jobs
 cd /tmp
+rm -rf /tmp/cdk-cats
 
 # pull repo
 git clone https://github.com/CalvinHartwell/cdk-cats.git
@@ -28,11 +30,7 @@ sudo docker build . -t="calvinhartwell/cdk-cats:latest"
 sudo docker push  calvinhartwell/cdk-cats
 
 # apply the latest version to kubernetes
-kubectl set image deploy/cdk-cats cdk-cats=calvinhartwell/cdk-cats:latest
-
-# cleanup
-cd /tmp
-rm -rf /tmp/cdk-cats'''
+kubectl set image deploy/cdk-cats cdk-cats=calvinhartwell/cdk-cats:latest'''
       }
     }
   }
