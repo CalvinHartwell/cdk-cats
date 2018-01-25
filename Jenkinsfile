@@ -30,7 +30,7 @@ docker build . -t="calvinhartwell/cdk-cats:latest"
 docker push  calvinhartwell/cdk-cats
 
 # apply the latest version to kubernetes
-kubectl set image deploy/cdk-cats cdk-cats=calvinhartwell/cdk-cats:latest'''
+kubectl set image deployment/cdk-cats cdk-cats=calvinhartwell/cdk-cats'''
       }
     }
   }
