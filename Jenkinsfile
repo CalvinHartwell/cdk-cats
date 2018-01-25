@@ -10,7 +10,7 @@ pipeline {
       steps {
         sh '''# Determine user used by jenkins for debugging
 whoami
-
+groups
 
 # Perform everything in tmp, clean up from failed jobs
 cd /tmp
