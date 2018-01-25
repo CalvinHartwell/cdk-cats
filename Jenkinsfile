@@ -24,10 +24,10 @@ cd cdk-cats
 docker login -u calvinhartwell -p Test123
 
 # build docker container
-sudo docker build . -t="calvinhartwell/cdk-cats:latest"
+docker build . -t="calvinhartwell/cdk-cats:latest"
 
 # push the docker container 
-sudo docker push  calvinhartwell/cdk-cats
+docker push  calvinhartwell/cdk-cats
 
 # apply the latest version to kubernetes
 kubectl set image deploy/cdk-cats cdk-cats=calvinhartwell/cdk-cats:latest'''
