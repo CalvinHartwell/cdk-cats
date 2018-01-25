@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('poll code') {
       steps {
-        git(url: 'github.com/CalvinHartwell/cdk-cats', branch: 'master', poll: true)
+        git(url: 'https://github.com/CalvinHartwell/cdk-cats.git', branch: 'master', poll: true)
       }
     }
     stage('deploy') {
