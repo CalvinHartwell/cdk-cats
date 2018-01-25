@@ -8,7 +8,10 @@ pipeline {
     }
     stage('deploy') {
       steps {
-        sh '''# Perform everything in tmp 
+        sh '''# Determine user used by jenkins for debugging
+whoami
+
+# Perform everything in tmp 
 cd /tmp
 
 # pull repo
