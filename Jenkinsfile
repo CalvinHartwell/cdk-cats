@@ -8,11 +8,15 @@ pipeline {
     }
     stage('deploy') {
       steps {
-        sh '''# 
+        sh '''# Perform everything in tmp 
 cd /tmp
 
 # pull repo
-git pull https://github.com/CalvinHartwell/cdk-cats.git
+git clone https://github.com/CalvinHartwell/cdk-cats.git
+cd cdk-cats
+
+# login to docker
+docker login -u calvinhartwell -p Test123
 
 # build docker container
 sudo docker build . -t="calvinhartwell/cdk-cats:latest"
@@ -20,7 +24,12 @@ sudo docker build . -t="calvinhartwell/cdk-cats:latest"
 # push the docker container 
 sudo docker push  calvinhartwell/cdk-cats
 
-# apply the deployment'''
+# apply the latest version to kubernetes
+kubectl set image deploy/cdk-cats cdk-cats=calvinhartwell/cdk-cats:latest
+
+# cleanup
+cd /tmp
+rm -rf /tmp/cdk-cats'''
       }
     }
   }
