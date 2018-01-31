@@ -12,7 +12,7 @@ RUN \
   chown -R www-data:www-data /var/lib/nginx
 
 # Copy the index.html
-COPY cat.jpg /usr/share/www/html
+COPY cat.jpg /usr/share/www/html/
 COPY index.html /usr/share/www/html/
 
 # entry point
