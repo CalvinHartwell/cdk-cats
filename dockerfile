@@ -11,9 +11,8 @@ RUN \
   echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
   chown -R www-data:www-data /var/lib/nginx
 
-# Copy the index.html
-COPY cat.jpg /usr/share/www/html/
-COPY index.html /usr/share/www/html/
+# Copy the site to correct place
+COPY html /usr/share/nginx/html
 
 # entry point
 CMD ["nginx"]
