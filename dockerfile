@@ -13,14 +13,17 @@ RUN \
 
 # Copy the index.html
 COPY html /usr/share/nginx/html
+COPY html /var/www/html
 
-# copy start script
-COPY start_nginx.sh /
+# replace with correct hostname
+RUN \
+hostname=`hostname -f` && \
+sed -i "s/XXX/${hostname}/" /usr/share/nginx/html/index.html && \
+sed -i "s/XXX/${hostname}/" /var/www/html/index.html
 
-# Run nginx
-CMD /start_nginx.sh
+# run nginx
+CMD ["nginx"]
 
 # Expose ports.
 EXPOSE 80
 EXPOSE 443
-
