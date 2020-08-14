@@ -9,17 +9,13 @@ RUN \
   apt-get install -y nginx && \
   rm -rf /var/lib/apt/lists/* && \
   echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
-  chown -R www-data:www-data /var/lib/nginx
+  chown -R www-data:www-data /var/lib/nginx && \
+  rm -rf /etc/nginx/sites-enabled/default
 
-# Copy the index.html
+# Copy the index.html & vhost config
+COPY default /etc/nginx/sites-enabled/default
 COPY html /usr/share/nginx/html
 COPY html /var/www/html
-
-# replace with correct hostname
-RUN \
-hostname=`hostname -f` && \
-sed -i "s/XXX/${hostname}/" /usr/share/nginx/html/index.html && \
-sed -i "s/XXX/${hostname}/" /var/www/html/index.html
 
 # run nginx
 CMD ["nginx"]
